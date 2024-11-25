@@ -29,9 +29,8 @@ jobs:
           ssh -i ~/.ssh/id_rsa ubuntu@ec2-3-95-218-56.compute-1.amazonaws.com << 'EOF'
             cd /home/ubuntu/practice1.js
             git pull origin main
-            # Matar procesos que usen el puerto 3000
-            sudo kill -9 $(sudo lsof -t -i:3000) || true
-            # Instalar dependencias y reiniciar el servidor
             npm install
-            npm start &
+            # Usar PM2 para iniciar/reiniciar el servidor
+            pm2 start app.js --name "practice1" || pm2 restart "practice1"
+            pm2 save
           EOF
