@@ -33,5 +33,5 @@ jobs:
             sudo kill -9 $(sudo lsof -t -i:3000) || true
             # Instalar dependencias y reiniciar el servidor
             npm install
-            npm start
+            npm start &
           EOF
